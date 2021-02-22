@@ -1,4 +1,11 @@
+import Formregister from "../../Components/FormRegister";
+
 const Register = () => {
-  return <div>REGISTER</div>;
+  return (
+    <>
+      <h2>Registro</h2>
+      <Formregister />
+    </>
+  );
 };
 export default Register;
