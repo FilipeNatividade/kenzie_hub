@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import HomePage from "../../Components/HomePage";
 
-const Home = () => {
+const Home = ({ setAuthentc }) => {
   const [user, setUser] = useState({});
 
   const [token, setToken] = useState(() => {
     const storageToken = localStorage.getItem("token") || "";
+    if (!storageToken) {
+      return "";
+    }
+    setAuthentc(true);
     return JSON.parse(storageToken);
   });
 
@@ -19,11 +24,14 @@ const Home = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  if (!token) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <div>
-      <h2>HOME</h2>
+    <>
       <HomePage />
-    </div>
+    </>
   );
 };
 export default Home;

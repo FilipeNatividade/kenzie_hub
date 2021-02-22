@@ -2,8 +2,9 @@ import { Switch, Route } from "react-router-dom";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Home from "../Pages/Home";
+import NotFound from "../Pages/NotFound";
 
-const Routes = () => {
+const Routes = ({ setAuthentc }) => {
   return (
     <Switch>
       <Route exact path="/">
@@ -13,7 +14,10 @@ const Routes = () => {
         <Register />
       </Route>
       <Route exact path="/home">
-        <Home />
+        <Home setAuthentc={setAuthentc} />
+      </Route>
+      <Route>
+        <NotFound />
       </Route>
     </Switch>
   );

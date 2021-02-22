@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ButtonAppBar = () => {
+const ButtonAppBar = ({ authentc, setAuthentc }) => {
   const history = useHistory();
 
   const classes = useStyles();
@@ -28,19 +28,35 @@ const ButtonAppBar = () => {
     history.push(path);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    setAuthentc(false);
+    sendTo("/");
+  };
+
   return (
     <div className={classes.root}>
       <AppBar color="secondary" className="appBar" position="static">
         <Toolbar>
-          <Button onClick={() => sendTo("/")} color="inherit">
-            Login
-          </Button>
-          <Button onClick={() => sendTo("/register")} color="inherit">
-            Register
-          </Button>
-          <Button onClick={() => sendTo("/home")} color="inherit">
-            Home
-          </Button>
+          {authentc ? (
+            <>
+              <Button onClick={() => sendTo("/home")} color="inherit">
+                Home
+              </Button>
+              <Button onClick={handleLogout} color="inherit">
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={() => sendTo("/")} color="inherit">
+                Login
+              </Button>
+              <Button onClick={() => sendTo("/register")} color="inherit">
+                Register
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>
