@@ -1,6 +1,8 @@
+body {
+  background-color: #dedede;
+}
 .App {
   text-align: center;
-  background-color: #dedede;
   height: 100vh;
 }
 

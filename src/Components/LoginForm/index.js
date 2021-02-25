@@ -1,6 +1,5 @@
-import React from "react";
+import { React, useState } from "react";
 import { TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +8,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
+  const [tech, setTech] = useState("");
+
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -34,7 +35,7 @@ const LoginForm = () => {
       .post("https://kenziehub.me/sessions", data)
       .then((response) => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
-
+        localStorage.setItem("id", JSON.stringify(response.data.user.id));
         reset();
         history.push("/home");
       })

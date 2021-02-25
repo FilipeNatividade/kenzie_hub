@@ -23,9 +23,8 @@ const FormRegister = () => {
   const history = useHistory();
 
   const schema = yup.object().shape({
-    email: yup.string().email("Email inválido").required("Campo obrigatório"),
     name: yup.string().required("Campo obrigatório"),
-    bio: yup.string().required("Campo obrigatório"),
+    bio: yup.array().required("Campo obrigatório"),
     course_module: yup.string().required("Campo obrigatório"),
     contact: yup.string().required("Campo obrigatório"),
     password: yup
